@@ -1,20 +1,27 @@
 import React, { useState } from 'react'
 import classes from  './sign.module.css'
 import { useRef } from 'react';
-
+import {Link , Nevigate  } from "react-router-dom";
+import AuthContextt from '../Context/Context';
+import { useContext } from 'react';
 export default function Signup() {
 
+  const authCtx = useContext(AuthContextt);
+  
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
     const confirmpasswordInputRef = useRef();
 
+    const [isLogin, setIsLogin] = useState(true);
+    
     const submitHandler = (event) => {
         //Prevent page reload
         event.preventDefault()
-       
+     
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
         const confirmenteredPassword = confirmpasswordInputRef.current.value;
+        
         
         fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAfZcDaenqQQYY9FxZmZaeCQVcqxQ0NcCg',
             {
@@ -33,7 +40,7 @@ export default function Signup() {
             if (respo.ok) {
                 // ...
                 return respo.json() ;
-                console.log("if res.ok")
+              //  console.log("if res.ok")
               } 
               else {
                     console.log("kuchh bhi else")
@@ -50,7 +57,7 @@ export default function Signup() {
         }).then((data) => {
             console.log(data)
             console.log('User has successfully signed up.')
-           // authCtx.login(data.idToken);
+           authCtx.login(data.idToken);
             
           })
           .catch((err) => {
@@ -75,8 +82,7 @@ export default function Signup() {
         </div>
         <button >SignUp</button>
         </form>
-        
-        <button>Have an account?Login</button>
+        <Link to='/login'><button>Have an account?Login</button></Link>
         </div>
 
 )       
