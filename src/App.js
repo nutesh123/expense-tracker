@@ -1,4 +1,5 @@
 import Signup from './Components/Authentication/Signup';
+import ProfileUpdate from './Components/nevigationbar/ProfileUpdate';
 import './App.css';
 import React from 'react';
 import { Routes, Route, Link } from "react-router-dom";
@@ -11,6 +12,7 @@ function App() {
 
   const authCtx = useContext(AuthContextt);
   const isLoggedIn = authCtx.isLoggedIn;
+
 console.log(isLoggedIn)
   return (
     <div className="App">
@@ -21,6 +23,9 @@ console.log(isLoggedIn)
     </Route>
    </Routes>
 }
+<Routes>
+    <Route path='/profileupdate' element={<ProfileUpdate></ProfileUpdate>}></Route>
+   </Routes>
     </div>
   );
 }
