@@ -1,5 +1,6 @@
 import Signup from './Components/Authentication/Signup';
 import ProfileUpdate from './Components/nevigationbar/ProfileUpdate';
+import Expenses from './Components/expenses/Expenses';
 import './App.css';
 import React from 'react';
 import { Routes, Route, Link } from "react-router-dom";
@@ -26,6 +27,7 @@ console.log(isLoggedIn)
 <Routes>
     <Route path='/profileupdate' element={<ProfileUpdate></ProfileUpdate>}></Route>
    </Routes>
+   <Expenses></Expenses>
     </div>
   );
 }

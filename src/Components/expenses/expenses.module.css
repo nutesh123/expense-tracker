@@ -1,0 +1,10 @@
+.expenses{
+    width: 15cm;
+    background-color: aliceblue;
+    height:2cm;
+    display: flex;
+    align-items: center;
+    margin-top: 5mm;
+    margin-left: 8cm;
+    justify-content: center;
+    }

@@ -64,6 +64,7 @@ export default function Signup() {
             console.log(err)
             alert(err.message);
           });
+
     }
   return (
      <div>
