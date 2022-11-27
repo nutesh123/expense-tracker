@@ -3,7 +3,7 @@ import ProfileUpdate from './Components/nevigationbar/ProfileUpdate';
 import Expenses from './Components/expenses/Expenses';
 import './App.css';
 import React from 'react';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Login from './Components/Authentication/Login';
 import Profile from './Components/nevigationbar/Profile';
 import AuthContextt from './Components/Context/Context';
@@ -17,17 +17,19 @@ function App() {
 console.log(isLoggedIn)
   return (
     <div className="App">
-      {isLoggedIn ? <Profile></Profile>:
+      {isLoggedIn ? <div>
+       <Profile></Profile>
+       <Routes>
+    <Route path='/profileupdate' element={<ProfileUpdate></ProfileUpdate>}></Route>
+   </Routes>
+   <Expenses></Expenses> </div>
+   :
    <Routes>
     <Route exact path='/login' element={<Login></Login>}/>
     <Route path='/signup' element={<Signup></Signup>}>
     </Route>
    </Routes>
 }
-<Routes>
-    <Route path='/profileupdate' element={<ProfileUpdate></ProfileUpdate>}></Route>
-   </Routes>
-   <Expenses></Expenses>
     </div>
   );
 }

@@ -1,24 +1,13 @@
-import React, { useRef, useState } from 'react';
-import ExpenseForm from './ExpenseForm';
+import React, { useRef, useState ,useEffect } from 'react';
 import classes from './expenses.module.css'
 
-//import './ExpenseForm.css';
-
 function Expenses() {
-  const [enteredTitle, setEnteredTitle] = useState([]);
-  const [enteredAmount, setEnteredAmount] = useState([]);
 
   const nameRef = useRef();
   const amountRef = useRef();
   const CategoryRef = useRef();
 
   const [data , setdata]=useState([])
-
-  // function detaChangeHandler (event) {
-  //   event.preventDefault();
-  //   setEnteredTitle(event.target.value);
-  //   setEnteredAmount(event.target.value);
-  // };
 
   function submitHandler (event) {
     event.preventDefault()
@@ -27,20 +16,44 @@ function Expenses() {
     const amount = amountRef.current.value;
      const Category = CategoryRef.current.value
 
-     const expensedeta={
-      item :name,
-      amount:amount,
-      Category:Category
-     }
-
          setdata( (olditems)=>{
-       //event.preventDefault();
        return[...olditems,[ name, amount,Category]]
      })
-
-    console.log(data);
-    //console.log(amount);
   };
+
+ // const [expensedata, setexpensedata] = useState([]);
+
+  let handleSubmit = async () => {
+      try {
+        let res = await fetch("https://expense-tracker-75fc2-default-rtdb.asia-southeast1.firebasedatabase.app//expenselist.json", {
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+        let resJson = await res.json();
+        if (res.status === 200) {
+          console.log('succesfully send',res)
+        } else {
+          console.log("Some error occured");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    useEffect(()=>{
+
+      fetch("https://expense-tracker-75fc2-default-rtdb.asia-southeast1.firebasedatabase.app//expenselist.json")
+      .then(Response=>Response.json()).then(jsondata =>{
+        console.log(jsondata)
+        const propertyValues=Object.values(jsondata);
+        
+        setdata(propertyValues);
+        console.log(propertyValues)
+               }).catch((err)=>
+               {
+              console.log(err);  })
+  
+    },[])
+   
 
   return (
     <div>
@@ -75,7 +88,7 @@ function Expenses() {
 </select> 
  </div>
       <div className='new-expense__actions'>
-        <button type='submit'>Add Expense</button>
+        <button type='submit' onClick={handleSubmit}>Add Expense</button>
       </div>
     </form>
     {data.map((item)=> {
@@ -83,6 +96,8 @@ function Expenses() {
             <h4 style={{padding: "1cm"}}>Amount= {item[1]}</h4>
           <div>  <h4> description= {item[0]}</h4></div>
             <h4 style={{padding: "1cm"}}> Category= {item[2]}</h4>
+            <button>Edit</button>
+           - <button style={{ backgroundColor:'orange'}}>Delete</button>
           </div>
         })
         }

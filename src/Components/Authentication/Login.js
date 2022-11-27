@@ -12,12 +12,12 @@ export default function Login() {
     const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
-  const [isLogin, setIsLogin] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLogin, setIsLogin] = useState(true);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const switchAuthModeHandler = () => {
-    setIsLogin((prevState) => !prevState);
-  };
+  // const switchAuthModeHandler = () => {
+  //   setIsLogin((prevState) => !prevState);
+  // };
 
     const submitHandler = (event) => {
         //Prevent page reload
@@ -27,7 +27,7 @@ export default function Login() {
         const enteredPassword = passwordInputRef.current.value;
     
         // optional: Add validation
-        setIsLoading(true);
+      //  setIsLoading(true);
        
         fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAfZcDaenqQQYY9FxZmZaeCQVcqxQ0NcCg',
             {
@@ -43,7 +43,7 @@ export default function Login() {
             }
           ).then((res) => {
             console.log("kuchh bhi", res)
-            setIsLoading(false);
+           // setIsLoading(false);
             if (res.ok) {
               // ...
               return res.json() ;

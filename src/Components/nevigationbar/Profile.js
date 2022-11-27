@@ -10,6 +10,7 @@ function Profile() {
 
   const authCtx = useContext(AuthContextt);
   const token=authCtx.token
+  
   const logouthandler = () => {
     authCtx.logout()
   };
@@ -53,41 +54,41 @@ function Profile() {
           alert(err.message);
         });
 
-        fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAfZcDaenqQQYY9FxZmZaeCQVcqxQ0NcCg',
-    {
-      method: 'POST',
-      body: JSON.stringify({
-         oobCode:"identitytoolkit#GetOobConfirmationCodeResponse",
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  ).then((res) => {
-        console.log("kuchh bhi", res)
-        if (res.ok) {
-          // ...
-          return res.json() ;
-          //console.log("if res.ok")
-        } else {
-          console.log("kuchh bhi else")
-          return res.json().then((data) => {
-            let errorMessage = 'Authentication failed!';
-             if (data && data.error && data.error.message) 
-             {
-              errorMessage = data.error.message;
-             }
+  //       fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAfZcDaenqQQYY9FxZmZaeCQVcqxQ0NcCg',
+  //   {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //        oobCode:"identitytoolkit#GetOobConfirmationCodeResponse",
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   }
+  // ).then((res) => {
+  //       console.log("kuchh bhi", res)
+  //       if (res.ok) {
+  //         // ...
+  //         return res.json() ;
+  //         //console.log("if res.ok")
+  //       } else {
+  //         console.log("kuchh bhi else")
+  //         return res.json().then((data) => {
+  //           let errorMessage = 'Authentication failed!';
+  //            if (data && data.error && data.error.message) 
+  //            {
+  //             errorMessage = data.error.message;
+  //            }
       
-             throw new Error(errorMessage);
-            });
-          }
-        })
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
+  //            throw new Error(errorMessage);
+  //           });
+  //         }
+  //       })
+  //       .then((data) => {
+  //         console.log(data)
+  //       })
+  //       .catch((err) => {
+  //         alert(err.message);
+  //       });
     };
   return (
     <div>Welcome to expense Tracker 

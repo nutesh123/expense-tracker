@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import classes from  './sign.module.css'
 import { useRef } from 'react';
-import {Link , Nevigate  } from "react-router-dom";
+import {Link } from "react-router-dom";
 import AuthContextt from '../Context/Context';
 import { useContext } from 'react';
 export default function Signup() {

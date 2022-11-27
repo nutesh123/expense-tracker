@@ -61,7 +61,6 @@ function ProfileUpdate() {
   return (
     <div> <h4>Winners never quite, Quitters never win</h4>
       <p>Your profile is 64% Complete Complete profile have higher chances of landing a job <Link>Complete now</Link></p>
-      <hr></hr>
       <form onSubmit={submitHandler}>
        <h4> Contact Details <button>Cancal</button> </h4>
         <label for='name'>Full Name</label>
@@ -70,6 +69,7 @@ function ProfileUpdate() {
         <input type='text' id='url' ref={urlref}/>
         <button>Update</button>
       </form>
+      <hr></hr>
     </div>
   )
 }
