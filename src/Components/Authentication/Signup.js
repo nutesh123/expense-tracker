@@ -12,7 +12,7 @@ export default function Signup() {
     const passwordInputRef = useRef();
     const confirmpasswordInputRef = useRef();
 
-    const [isLogin, setIsLogin] = useState(true);
+    // const [isLogin, setIsLogin] = useState(true);
     
     const submitHandler = (event) => {
         //Prevent page reload

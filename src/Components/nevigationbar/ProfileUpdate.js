@@ -1,14 +1,52 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useRef ,useContext } from 'react'
+import { useRef ,useContext , useEffect} from 'react'
 import AuthContextt from '../Context/Context';
 
 function ProfileUpdate() {
+
   const authCtx = useContext(AuthContextt);
   const nameref=useRef()
   const urlref=useRef()
 
-  const submitHandler = (event) => {
+  
+  const autogetData=async()=>{
+    const token = localStorage.getItem('token');
+    try{
+        const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAfZcDaenqQQYY9FxZmZaeCQVcqxQ0NcCg',
+        {
+            method: "POST",
+            body: JSON.stringify({
+                idToken: token,
+              returnSecureToken: true,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        if(res.ok){
+            const data = await res.json();
+            data.users.forEach(element => {
+                console.log(data.users);
+                nameref.current.value=element.displayName;
+                urlref.current.value=element.photoUrl;
+            });
+        }else{
+            const data = await res.json();
+            console.log(data)
+        }
+
+    }catch(err){
+        console.log('Auto fetch error!');
+    }
+}
+
+useEffect(()=>{
+autogetData();
+},[]);
+
+  const submitHandler = async(event) => {
     //Prevent page reload
     event.preventDefault()
 
@@ -16,7 +54,8 @@ function ProfileUpdate() {
     const url = urlref.current.value;
     const token=authCtx.token
 
-    fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAfZcDaenqQQYY9FxZmZaeCQVcqxQ0NcCg',
+    try{
+      const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyAfZcDaenqQQYY9FxZmZaeCQVcqxQ0NcCg',
             {
               method: 'POST',
               body: JSON.stringify({
@@ -29,35 +68,20 @@ function ProfileUpdate() {
                 'Content-Type': 'application/json',
               },
             }
-          ).then((respo) => {
-            console.log("my console respose", respo)
-            if (respo.ok) {
-              // ...
-              return respo.json() ;
-            //  console.log("if res.ok")
-            } 
-            else {
-                  console.log("kuchh bhi else")
-                  return respo.json().then((data) => {
-                  let errorMessage = 'Authentication failed!';
-                   if (data && data.error && data.error.message) 
-                   {
-                    errorMessage = data.error.message;
-                   }
-            
-                   throw new Error(errorMessage);
-                  });
-          }
-      }).then((data) => {
-          console.log(data)
-          console.log('User has successfully signed up.')
-        })
-        .catch((err) => {
-          console.log(err)
-          alert(err.message);
-        });
-  }
-
+          ) 
+          if(res.ok){
+            const data = await res.json();
+            console.log(data);
+            alert('wohoo , Your Data Saved!')
+        }else{
+            const data = await res.json();
+            console.log(data)
+            alert(data.error.message)
+        }
+    }catch(err){
+        console('Updaing went wrong!')
+    }
+}
   return (
     <div> <h4>Winners never quite, Quitters never win</h4>
       <p>Your profile is 64% Complete Complete profile have higher chances of landing a job <Link>Complete now</Link></p>
