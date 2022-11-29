@@ -16,8 +16,19 @@ function Expenses() {
     const amount = amountRef.current.value;
      const Category = CategoryRef.current.value
 
+     const expensedata ={
+      name :name,
+     amount : amount,
+     Category : Category
+     }
+
+    //  const arrydata=Object.values(expensedata)
+    //       console.log(data)
+    //       console.log(arrydata)
+    //    //  setdata(arrydata)
+
          setdata( (olditems)=>{
-       return[...olditems,[ name, amount,Category]]
+       return[...olditems,[ name , amount , Category]]
      })
   };
 
@@ -47,7 +58,7 @@ function Expenses() {
         const propertyValues=Object.values(jsondata);
         
         setdata(propertyValues);
-        console.log(propertyValues)
+        //console.log(propertyValues)
                }).catch((err)=>
                {
               console.log(err);  })
@@ -91,7 +102,7 @@ function Expenses() {
         <button type='submit' onClick={handleSubmit}>Add Expense</button>
       </div>
     </form>
-    {data.map((item)=> {
+    {/* {data.map((item)=> {
           return <div className={classes.expenses} >
             <h4 style={{padding: "1cm"}}>Amount= {item[1]}</h4>
           <div>  <h4> description= {item[0]}</h4></div>
@@ -100,7 +111,7 @@ function Expenses() {
            - <button style={{ backgroundColor:'orange'}}>Delete</button>
           </div>
         })
-        }
+        } */}
     </div>
   );
 };

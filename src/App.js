@@ -6,6 +6,7 @@ import React from 'react';
 import { Routes, Route} from "react-router-dom";
 import Login from './Components/Authentication/Login';
 import Profile from './Components/nevigationbar/Profile';
+import Forgot from './Components/Authentication/Forgot';
 import AuthContextt from './Components/Context/Context';
 import { useContext } from 'react';
 
@@ -28,6 +29,7 @@ console.log(isLoggedIn)
     <Route exact path='/login' element={<Login></Login>}/>
     <Route path='/signup' element={<Signup></Signup>}>
     </Route>
+    <Route path='/forgotpin' element={<Forgot/>}/>
    </Routes>
 }
     </div>

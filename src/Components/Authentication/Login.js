@@ -4,6 +4,7 @@ import React from "react";
 import classes from  './sign.module.css'
 import Signup from "./Signup";
 import AuthContextt from "../Context/Context";
+import Forgot from "./Forgot";
 
 export default function Login() {
    
@@ -75,8 +76,7 @@ export default function Login() {
     <div>
       <Routes>
     <Route exact path='/login' element={<Login></Login>}/>
-    <Route path='/signup' element={<Signup></Signup>}>
-    </Route>
+    <Route path='/signup' element={<Signup></Signup>}/>
    </Routes>
 
             <div  className={classes.form}>
@@ -91,7 +91,7 @@ export default function Login() {
         </div>
         <button >SignUp</button>
         </form>
-        <Link >forgot password</Link>
+        <Link to='/forgotpin' >forgot password</Link>
         
         </div>
         <Link to='/signup'> <button>Dont Have an account?Signup</button></Link>
