@@ -21,14 +21,8 @@ function Expenses() {
      amount : amount,
      Category : Category
      }
-
-    //  const arrydata=Object.values(expensedata)
-    //       console.log(data)
-    //       console.log(arrydata)
-    //    //  setdata(arrydata)
-
          setdata( (olditems)=>{
-       return[...olditems,[ name , amount , Category]]
+       return[...olditems, expensedata]
      })
   };
 
@@ -36,9 +30,21 @@ function Expenses() {
 
   let handleSubmit = async () => {
       try {
+
+        const name = nameRef.current.value;
+        const amount = amountRef.current.value;
+         const Category = CategoryRef.current.value
+
         let res = await fetch("https://expense-tracker-75fc2-default-rtdb.asia-southeast1.firebasedatabase.app//expenselist.json", {
           method: "POST",
-          body: JSON.stringify(data),
+          body: JSON.stringify({
+            name :name,
+           amount : amount,
+           Category : Category
+           }) ,
+           headers: {
+            'Content-Type': 'application/json',
+          },
         });
         let resJson = await res.json();
         if (res.status === 200) {
@@ -54,15 +60,12 @@ function Expenses() {
 
       fetch("https://expense-tracker-75fc2-default-rtdb.asia-southeast1.firebasedatabase.app//expenselist.json")
       .then(Response=>Response.json()).then(jsondata =>{
-        console.log(jsondata)
         const propertyValues=Object.values(jsondata);
         
         setdata(propertyValues);
-        //console.log(propertyValues)
                }).catch((err)=>
                {
               console.log(err);  })
-  
     },[])
    
 
@@ -102,16 +105,16 @@ function Expenses() {
         <button type='submit' onClick={handleSubmit}>Add Expense</button>
       </div>
     </form>
-    {/* {data.map((item)=> {
+    {data.map((item)=> {
           return <div className={classes.expenses} >
-            <h4 style={{padding: "1cm"}}>Amount= {item[1]}</h4>
-          <div>  <h4> description= {item[0]}</h4></div>
-            <h4 style={{padding: "1cm"}}> Category= {item[2]}</h4>
+            <h4 style={{padding: "1cm"}}>Amount= {item.amount}</h4>
+          <div>  <h4> description= {item.name}</h4></div>
+            <h4 style={{padding: "1cm"}}> Category= {item.Category}</h4>
             <button>Edit</button>
            - <button style={{ backgroundColor:'orange'}}>Delete</button>
           </div>
         })
-        } */}
+        }
     </div>
   );
 };
