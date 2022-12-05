@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "name": "bill",
+      "amount": "1050",
+      "Category": "bills",
+      "id": 0.8873092950820016
+    },
+    {
+      "name": "bike",
+      "amount": "11000",
+      "Category": "EMI",
+      "id": 0.6946370026160338
+    },
+    {
+      "name": "sbi bond",
+      "amount": "50000",
+      "Category": "investment",
+      "id": 0.48013920198508675
+    },
+    {
+      "name": "candy",
+      "amount": "4",
+      "Category": "miscellaneouse",
+      "id": 0.49871659121519385
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "json-server --watch db.json --port 3002"
+  }
+}

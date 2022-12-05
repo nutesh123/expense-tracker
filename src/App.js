@@ -14,8 +14,6 @@ function App() {
 
   const authCtx = useContext(AuthContextt);
   const isLoggedIn = authCtx.isLoggedIn;
-
-console.log(isLoggedIn)
   return (
     <div className="App">
       {isLoggedIn ? <div>

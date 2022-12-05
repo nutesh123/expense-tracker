@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import classes from  './sign.module.css'
 import { useRef } from 'react';
 import {Link } from "react-router-dom";
@@ -20,7 +20,7 @@ export default function Signup() {
      
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
-        const confirmenteredPassword = confirmpasswordInputRef.current.value;
+       // const confirmenteredPassword = confirmpasswordInputRef.current.value;
         
         
         fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAfZcDaenqQQYY9FxZmZaeCQVcqxQ0NcCg',
