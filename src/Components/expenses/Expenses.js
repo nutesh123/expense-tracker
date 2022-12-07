@@ -1,18 +1,25 @@
 import React, { useRef, useState ,useEffect } from 'react';
 import classes from './expenses.module.css'
 import axios from 'axios';
+import { useDispatch , useSelector} from 'react-redux';
+import PremButton from './PremButton';
+import { Link } from 'react-router-dom';
+import Logout from '../nevigationbar/Logout';
 
-function Expenses(props) {
+
+function Expenses() {
 
   const catref =useRef()
+  const dispatch =useDispatch()
+  const showButton = useSelector((st)=>st.auth.showPremButton)
 
     const [data , setdata]=useState([])
    const [ showEdit , setshowEdit]=useState(false)
    const [name , setname]=useState( '')
-   const [amount , setamount]=useState('')
-   const [cat , setcat]=useState('')
+   const [amount , setamount]=useState( )
+   const [cat , setcat] = useState( '')
   
-       
+
   let handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -66,21 +73,24 @@ function Expenses(props) {
          
       fetch("http://localhost:3002/posts")
       .then(Response=>Response.json()).then(jsondata =>{
+
         const propertyValues=Object.values(jsondata);
+    
         setdata(propertyValues);
                }).catch((err)=>
                {
               console.log(err);
               })
-    },[data])
-
+        
+    },[ ])
       const [ids , setid]=useState( )
+
    const editHandler = (id)=>
    {
     setid(id)
     setshowEdit(true)
     console.log('editHandler')
-
+    
     fetch(`http://localhost:3002/posts/${id}`)
     .then(Response=>Response.json()).then(jsondata =>{
 
@@ -119,9 +129,10 @@ function Expenses(props) {
     .catch(error => console.log(error));
     setdata(data.filter( exp => exp.id !== id))
    }
-
+     
   return (
-    <div>
+    <div >
+      <div className={classes.prem}>
     <form>
       <div className='new-expense__controls'>
         <div className='new-expense__control'>
@@ -156,8 +167,12 @@ function Expenses(props) {
         {!showEdit ? <button type='submit' onClick={handleSubmit}>Add Expense</button> : <button onClick={updateHandler}>update</button>}
       </div>
     </form>
-    {data.map((item)=> {
+    {showButton &&  <button className={classes.prembutton}>Activate Premium</button>}
+    </div>
     
+    {data.map((item)=> {
+      
+      // {dispatch(getdataToStore(item.amount))}
           return <div key={item.id}  className={classes.expenses} >
             <div key={Math.random()}/>
             <h4 style={{padding: "1cm"}}>Amount= {item.amount}</h4>
@@ -165,9 +180,12 @@ function Expenses(props) {
             <h4 style={{padding: "1cm"}}> Category= {item.Category}</h4>
             <button onClick={()=>editHandler(item.id)}  >Edit</button>
            - <button onClick={ ()=> deleteHandler(item.id)} style={{ backgroundColor:'orange'}}>Delete</button>
+           
           </div>
         })
         }
+       <Logout></Logout>
+        <PremButton></PremButton>
     </div>
   );
 };

@@ -1,28 +1,22 @@
 {
   "posts": [
     {
-      "name": "bill",
-      "amount": "1050",
-      "Category": "bills",
-      "id": 0.8873092950820016
+      "name": "",
+      "amount": "5000",
+      "Category": "food",
+      "id": 0.28541891980238865
     },
     {
-      "name": "bike",
-      "amount": "11000",
-      "Category": "EMI",
-      "id": 0.6946370026160338
+      "name": "",
+      "amount": "1000",
+      "Category": "food",
+      "id": 0.24663439981086221
     },
     {
-      "name": "sbi bond",
-      "amount": "50000",
-      "Category": "investment",
-      "id": 0.48013920198508675
-    },
-    {
-      "name": "candy",
-      "amount": "4",
-      "Category": "miscellaneouse",
-      "id": 0.49871659121519385
+      "name": "",
+      "amount": "1000",
+      "Category": "food",
+      "id": 0.0648717724436747
     }
   ],
   "comments": [],

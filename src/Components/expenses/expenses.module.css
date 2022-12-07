@@ -8,3 +8,15 @@
     margin-left: 8cm;
     justify-content: center;
     }
+    .prem{
+        display: flex;
+        justify-content: space-between;
+        margin-left: 12cm;
+        margin-right: 4cm;
+    }
+.prembutton{
+    block-size: 1cm;
+    background-color: rgba(237, 226, 23, 0.908);
+    border-radius: 6mm;
+    border-color: white;
+}
